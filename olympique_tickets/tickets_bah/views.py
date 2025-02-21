@@ -57,9 +57,9 @@ def reservation_create(request):
 
     return render(request, 'tickets_bah/reservation_form.html', {'offre': offre, "STRIPE_PUBLIC_KEY": settings.STRIPE_PUBLIC_KEY,})
 
-@user_passes_test(user_is_authenticate, login_url="/login")
+"""@user_passes_test(user_is_authenticate, login_url="/login")
 def reservation_store(request):
-    """Stocke les données de réservation et génère le billet"""
+    Stocke les données de réservation et génère le billet
     if request.method == 'POST':
         user = request.user
         utilisateur = get_object_or_404(Utilisateur, id=user.id)
@@ -85,7 +85,7 @@ def reservation_store(request):
         # Envoyer l'e-mail de confirmation
         envoyer_confirmation_reservation(utilisateur, reservation)
         sweetify.success(request, "Réservation effectuée avec succès !", button='Ok', timer=3000)
-        return redirect("e_billet")
+        return redirect("e_billet")"""
     
 
 @user_passes_test(user_is_authenticate, login_url="/login")
@@ -263,7 +263,7 @@ def create_checkout_session(request):
                             "product_data": {
                                 "name": "Offre - Jeux Olympiques",
                             },
-                            "unit_amount": 1000,  # Remplace avec le prix réel
+                            "unit_amount": int(offre.prix * 100),  # Convertir en centimes
                         },
                         "quantity": 1,
                     },
