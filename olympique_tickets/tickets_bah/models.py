@@ -126,10 +126,10 @@ class UtilisateurPayment(models.Model):
     updatedAt = models.DateTimeField(auto_now=True, null=True)
 
     # Champs Stripe
-    stripe_customer_id = models.CharField(max_length=255, blank=True, null=True)  # ID du client Stripe
-    stripe_payment_method_id = models.CharField(max_length=255, blank=True, null=True)  # ID du mode de paiement
-    last4 = models.CharField(max_length=4, blank=True, null=True)  # 4 derniers chiffres de la carte
-    expiry_date = models.CharField(max_length=7, blank=True, null=True)  # Date d'expiration (MM/YYYY)
+    stripe_customer_id = models.CharField(max_length=255, blank=True, null=True)
+    stripe_payment_method_id = models.CharField(max_length=255, blank=True, null=True)
+    last4 = models.CharField(max_length=4, blank=True, null=True)
+    expiry_date = models.CharField(max_length=7, blank=True, null=True)
 
     def __str__(self):
         return f"{self.utilisateur.nom} {self.utilisateur.prenom} - {self.offre.nom} - Paid: {self.has_paid}"

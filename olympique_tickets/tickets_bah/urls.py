@@ -19,6 +19,5 @@ urlpatterns = [
     path('e_billet/', views.e_billet, name='e_billet'),
     path('create_checkout_session/', views.create_checkout_session, name='create_checkout_session'),
     path('reservation/success', views.reservation_success, name='reservation_success'),
-    path('success/', views.success, name='success'),
-    path('cancel/', views.cancel, name='cancel'),
+    path('webhook/stripe/', views.stripe_webhook, name='stripe_webhook'),
 ]

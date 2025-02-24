@@ -21,7 +21,7 @@ from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 import stripe
 import json
-
+import logging
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -86,21 +86,7 @@ def reservation_store(request):
         envoyer_confirmation_reservation(utilisateur, reservation)
         sweetify.success(request, "Réservation effectuée avec succès !", button='Ok', timer=3000)
         return redirect("e_billet")"""
-    
-
-@user_passes_test(user_is_authenticate, login_url="/login")
-def e_billet(request):
-    reservation_id = request.session.get('reservation_id')  # Récupération de l'ID depuis la session
-
-    if not reservation_id:
-        sweetify.error(request, "Aucune réservation trouvée.", button='Ok')
-        return redirect('accueil')  # Redirection en cas d'erreur
-
-    reservation = get_object_or_404(Reservation, id=reservation_id)
-    context = {
-        "reservation": reservation
-    }
-    return render(request, "tickets_bah/e_billet.html", context)
+   
 
 
 #CREER LES VUES POUR: INSCRIPTION, CONNEXION, DECONNEXION
@@ -320,20 +306,54 @@ def reservation_success(request):
         reservation.generate_qr_code()
         reservation.save()
 
+
+        # Stocker l'ID de la réservation dans la session
+        request.session['reservation_id'] = reservation.id
+
         # Envoyer un email de confirmation
         envoyer_confirmation_reservation(utilisateur, reservation)
+
 
         # Rediriger vers la page du billet
         return redirect("e_billet")
 
     return redirect("/")
 
+ 
+
+@user_passes_test(user_is_authenticate, login_url="/login")
+def e_billet(request):
+    reservation_id = request.session.get('reservation_id')
+
+    if not reservation_id:
+        sweetify.error(request, "Aucune réservation trouvée.", button='Ok')
+        return redirect('home')  # Redirection en cas d'erreur
+
+    reservation = get_object_or_404(Reservation, id=reservation_id)
+    context = {
+        "reservation": reservation
+    }
+    return render(request, "tickets_bah/e_billet.html", context)
 
 
+@csrf_exempt
+def stripe_webhook(request):
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
 
+    try:
+        event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
+    except ValueError:
+        # Invalid payload
+        return HttpResponse(status=400)
+    
+    except stripe.error.SignatureVerificationError:
+        # Invalid signature
+        return HttpResponse(status=400)
+    
+    if event['type'] == 'checkout.session.completed':
+        print(event)
+        print('Paiement réussi...')
 
-def success(request):
-    return render(request=request, template_name="success.html")
-
-def cancel(request):
-    return render(request=request, template_name="cancel.html")
+    return HttpResponse(status=200)

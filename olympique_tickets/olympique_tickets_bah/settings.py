@@ -46,7 +46,7 @@ SECRET_KEY = "django-insecure-4&x#ke^@-8d1-25(ztbg4h56f6x#0y-mqr=ll3+-v=zyefnk%z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.ngrok-free.app', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -178,3 +178,5 @@ SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 
 
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY_TEST', "secret")
+
+STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET', "secret")
