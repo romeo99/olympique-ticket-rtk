@@ -11,16 +11,27 @@ Ce projet est une application Django permettant aux utilisateurs d'acheter des t
 - Gestion des offres par l'administrateur du site
 - Génération de code Qr pour chaque ticket acheté
 
+### Requirements
+Pour éxècuter le projet en local, assurez vous d'avoir installés les prérequis :
+    - Installer Python : https://www.python.org/
+    - Installer un gestionnaire de paquets comme PIP : https://pypi.org/project/pip/
+    - Installer Django : py -m pip install Django pour Windows ou python -m pip install Django pour Linux
+    - Versions des outils utilisés sur le projet : Python 3.10.12, Pip 22.0.2, Django 5.0.7
 
-### 1. **Clonez le dépôt**
-- git clone git@github.com:romeo99/olympique-ticket-rtk.git
-- cd olympique-ticket
+### Lancement du projet
+1. Clonez le projet depuis le dépôt github vers votre machine en local
+2. Installer les dépendances Pip via pip freeze > requirements.txt
+3. Copiez le fichier .env.example pour créer le fichier d'environnement .env
+4. Démarrer le serveur de développement de Django
+    - python3 manage.py runserver, cette commande lancera le serveur de développement 
+    sur l'adresse http://localhost::8000
+    - accéder au lien qui vous menèra sur lapage d'acueil du projet
 
-### 2. **Commandes à èxécuter**
+### 1. **Commandes à èxécuter**
 - pip freeze > requirements.txt
 - pip install stripe
 
-### 3. **Stripe Webhook**
+### 2. **Stripe Webhook**
 - Installez stripe : pip install stripe
 - Dans le .env mettez les clés  ==> STRIPE_SECRET_KEY_TEST, STRIPE_PUBLIC_KEY_TEST
 - Créez un compte Stripe et activez le webhook
