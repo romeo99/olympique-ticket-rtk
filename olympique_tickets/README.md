@@ -20,7 +20,7 @@ Pour éxècuter le projet en local, assurez vous d'avoir installés les prérequ
 
 ### Lancement du projet
 1. Clonez le projet depuis le dépôt github vers votre machine en local
-2. Installer les dépendances Pip via pip freeze > requirements.txt
+2. Installer les dépendances avec pip install -r  requirements.txt
 3. Copiez le fichier .env.example pour créer le fichier d'environnement .env
 4. Démarrer le serveur de développement de Django
     - python3 manage.py runserver, cette commande lancera le serveur de développement 
@@ -28,7 +28,7 @@ Pour éxècuter le projet en local, assurez vous d'avoir installés les prérequ
     - accéder au lien qui vous menèra sur lapage d'acueil du projet
 
 ### 1. **Commandes à èxécuter**
-- pip freeze > requirements.txt
+- pip install -r  requirements.txt
 - pip install stripe
 
 ### 2. **Stripe Webhook**
