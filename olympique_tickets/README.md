@@ -40,9 +40,10 @@ Pour éxècuter le projet en local, assurez vous d'avoir installés les prérequ
 - Tester avec Sripe CLI
     Pour installer la CLI Stripe sous Linux sans gestionnaire de paquets :
 
-        Téléchargez le dernier fichier tar.gz linux depuis GitHub.
+        Téléchargez le dernier fichier tar.gz linux depuis [GitHub](https://github.com/stripe/stripe-cli/releases/tag/v1.26.1).
         Décompressez le fichier : tar -xvf stripe_X.X.X_linux_x86_64.tar.gz.
         Déplacez ./stripe sur votre chemin d’exécution.
+        (Documentation)[https://docs.stripe.com/stripe-cli]
 
     Se connecter à l'interface de ligne de commande
 
@@ -51,6 +52,7 @@ Pour éxècuter le projet en local, assurez vous d'avoir installés les prérequ
 
     stripe listen --forward-to localhost:8000/webhook/stripe/ 
         Cette commande renvoie la clé secrète webhook qu'on met dans le point .env qu'on a nommé STRIPE_WEBHOOK_SECRET
+        NB : Assurez-vous d'avoir le serveur démarré avant l'éxécution de cette commande
 
 
 
