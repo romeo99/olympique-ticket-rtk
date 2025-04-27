@@ -18,6 +18,9 @@ Pour éxècuter le projet en local, assurez vous d'avoir installés les prérequ
     - Installer Django : py -m pip install Django pour Windows ou python -m pip install Django pour Linux
     - Versions des outils utilisés sur le projet : Python 3.10.12, Pip 22.0.2, Django 5.0.7
 
+### Installation PostgreSQl
+    - Installation PostgreSQL pour Django : pip install psycopg2 ou utiliser la version binaire : pip install psycopg2-binary
+
 ### Lancement du projet
 1. Clonez le projet depuis le dépôt github vers votre machine en local
 2. Installer les dépendances avec pip install -r  requirements.txt
